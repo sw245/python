@@ -1,0 +1,6 @@
+print("넹")
+print("안녕"*3)
+print(10+3)
+print(10-3)
+print(10*3)
+print(10/3)
