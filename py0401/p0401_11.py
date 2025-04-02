@@ -41,5 +41,6 @@ while True:
     elif choice == 2:
         print("[ 학생성적 출력 ]")
         print("번호\t이름\t국어\t영어\t수학\t합계\t평균\t등수")
-        print("{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}".format(*students))
+        for s in students:
+            print(f"{s['no']}\t{s['name']}\t{s['kor']}\t{s['eng']}\t{s['math']}\t{s['total']}\t{s['avg']:.2f}\t{s['rank']}")
 
