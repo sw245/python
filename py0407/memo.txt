@@ -1,0 +1,12 @@
+
+stuModule
+
+>> Student(): 개별 항목 변수 선언, 
+   Students(): 학생 별 데이터 리스트 선언
+
+
+stuFunc
+
+>> students = Students(): 클래스 호출
+
+
