@@ -2,9 +2,9 @@
 from stuModule import *
 from stuFunc import *
 
-        
-        
-    # print("3. 학생성적수정")
+
+
+
 
 while True:
     choice = tmenu_print()
@@ -12,10 +12,13 @@ while True:
     if choice == 1:
         stu_input()
         
-    if choice == 2:
+    elif choice == 2:
         stu_print()
+      
+    elif choice == 3:
+        stu_modify()
         
-    if choice == 0:
+    elif choice == 0:
         print("프로그램을 종료합니다.")
         break
 

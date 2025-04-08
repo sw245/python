@@ -33,9 +33,19 @@ class Student:
     def __str__(self):          # 특별함수 (오버라이딩??)
         return f"{self.no},{self.name},{self.kor},{self.eng},{self.math},{self.total},{self.avg:.2f},{self.rank}"
 
+    def __eq__(self,s):         # 다른 객체 1개를 매개변수로 전달받음
+        return ( self.total == s.total )
+            
+    def __ge__(self,s):
+        return ( self.avg >= s.avg )
+    
+    def __le__(self,s):
+        return ( self.math <= s.math )
+    
+    
 class Students:
     def __init__(self):
-        self.students = []      # Students 객체 내의 변수 (인스턴스 변수)
+        self.students = []
         
     def add(self,s):
         self.students.append(s)
