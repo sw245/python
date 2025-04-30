@@ -5,3 +5,5 @@ from stuProject.stuModule import *
 
 b = Student("ㅎㄱㄷ",100,100,100)
 print(b)
+
+
