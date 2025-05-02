@@ -16,7 +16,7 @@ query = "select employee_id,emp_name,salary from employees where salary between 
 query2 = "select employee_id,emp_name,salary from employees where emp_name like :name"
 cursor.execute(query2,name=name)
 # cursor.execute("select * from stuscore")    #sql구문 실행 - f9
-# rows = cursor.fetchall()    # 데이터를 가져옴.
+rows = cursor.fetchall()    # 데이터를 가져옴.
 
     
 for r in rows:
