@@ -9,5 +9,15 @@ print("chessboard")
 
 
 row = ['1','2','3','4','5','6','7','8',]
-column = ['a','b','c','d','e','f','g','h']
+column = ['a','','b','','c','','d','','e','','f','','g','','h']
+
+for c in column:
+    print(c)
+print('\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}'.format(*row))
+
+
+
+
+
+
 
