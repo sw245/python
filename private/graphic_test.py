@@ -39,8 +39,8 @@
 
 
 
-# ## 4. blessed 라이브러리
-# # 특징: ANSI 코드의 상위 래퍼로, 더 직관적인 터미널 제어를 제공합니다.
+## 4. blessed 라이브러리
+# 특징: ANSI 코드의 상위 래퍼로, 더 직관적인 터미널 제어를 제공합니다.
 
 # from blessed import Terminal
 
@@ -48,6 +48,10 @@
 # print(term.clear)
 # print(term.red('This is red text!'))
 # print(term.move_xy(10, 5) + 'Moved text')
+
+
+# print(term.bold('Q'))
+# print('Q')
 
 
 # ## 5. tqdm (애니메이션 효과)
@@ -113,3 +117,17 @@
 # t.right(90)
 # t.forward(100)
 # turtle.done()
+
+
+
+
+
+# print()
+
+# def draw_grid(rows, cols):
+#     for i in range(rows):
+#         print("+---" * cols + "+")
+#         print("|   " * cols + "|")
+#     print("+---" * cols + "+")
+
+# draw_grid(5, 5)
