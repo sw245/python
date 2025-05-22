@@ -131,3 +131,7 @@
 #     print("+---" * cols + "+")
 
 # draw_grid(5, 5)
+
+
+move = 'e4'
+print(len(move))

@@ -106,11 +106,13 @@ print('\t{}      {}      {}      {}      {}      {}      {}      {}  '.format(*a
 
 print()
 turn = 1
-# move = input("백 차례>>")
+move = input("백 차례>>")
         
-# if turn % 2 == 1:   # 백 턴
-#     moves.append(move)
-#     rows[move[-2:]] = move[0]
+if turn % 2 == 1:   # 백 턴
+    moves.append(move)
+    if len(move) == 2:
+        rows[move] = pawns_w[None]
+    rows[move[-2:]] = move[0]
     
 
 
