@@ -51,10 +51,11 @@ for i in range(8):
 
 
 
-pawns_w = ['p','p','p','p','p','p','p','p']
+
+pawns_w = {'a':'p','b':'p','c':'p','d':'p','e':'p','f':'p','g':'p','h':'p'}
 pieces_w = ['R','N','B','Q','K','B','N','R']
 
-pawns_r = [term.red('p'),term.red('p'),term.red('p'),term.red('p'),term.red('p'),term.red('p'),term.red('p'),term.red('p')]
+pawns_r = {'a':term.red('p'),'b':term.red('p'),'c':term.red('p'),'d':term.red('p'),'e':term.red('p'),'f':term.red('p'),'g':term.red('p'),'h':term.red('p')}
 pieces_r = [term.red('R'),term.red('N'),term.red('B'),term.red('K'),term.red('Q'),term.red('B'),term.red('N'),term.red('R')]
 
 moves = []
@@ -75,9 +76,9 @@ for i in range(8):
         if i+1 == 1:
             rows[f'{x}{i+1}'] = pieces_w[n]
         elif i+1 == 2:
-            rows[f'{x}{i+1}'] = pawns_w[n]
+            rows[f'{x}{i+1}'] = pawns_w[x]
         elif i+1 == 7:
-            rows[f'{x}{i+1}'] = pawns_r[n]
+            rows[f'{x}{i+1}'] = pawns_r[x]
         elif i+1 == 8:
             rows[f'{x}{i+1}'] = pieces_r[n]
 
@@ -105,14 +106,14 @@ print('\t{}      {}      {}      {}      {}      {}      {}      {}  '.format(*a
 # print('\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}'.format(*alphabet))
 
 print()
-turn = 1
-move = input("백 차례>>")
+# turn = 1
+# move = input("백 차례>>")
         
-if turn % 2 == 1:   # 백 턴
-    moves.append(move)
-    if len(move) == 2:
-        rows[move] = pawns_w[None]
-    rows[move[-2:]] = move[0]
+# if turn % 2 == 1:   # 백 턴
+#     moves.append(move)
+#     if len(move) == 2:
+#         rows[move] = pawns_w[move[0]]
+#     rows[move[-2:]] = move[0]
     
 
 
