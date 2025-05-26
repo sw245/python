@@ -60,16 +60,15 @@ pieces_r = [term.red('R'),term.red('N'),term.red('B'),term.red('K'),term.red('Q'
 
 moves = []
 
-
+on_board = {}
 
 
 
 
 # ### 칸에 기물 할당 ###
 
-
 ## 초기 세팅 
-# print(rows[8-1])
+
 
 for i in range(8):
     for n,x in enumerate(alphabet):
@@ -82,39 +81,50 @@ for i in range(8):
         elif i+1 == 8:
             rows[f'{x}{i+1}'] = pieces_r[n]
 
+
+
+## 기물:위치 값 저장
+
+
+## 위치 저장 필요한가?? ㅇㅇ 근데 단순 위치 말고 기물까지 포함하는 위치
+
+
+print(on_board)
+
 # print(rows)
 
 
-### 터미널 출력 부분 (그래픽) ###
+# ### 터미널 출력 부분 (그래픽) ###
 
-for r in board_number:
-    if r == ' ':
-        print(r,'  |',end='')
-        print('￣￣￣|'*8)
-    else:
-        print(r,'  |',end='')
-        print(f'\t{rows[f'a{r}']}  |   {rows[f'b{r}']}  |   {rows[f'c{r}']}  |   {rows[f'd{r}']}  |\
-   {rows[f'e{r}']}  |   {rows[f'f{r}']}  |   {rows[f'g{r}']}  |   {rows[f'h{r}']}  ',end='')
-        print('|')
+# for r in board_number:
+#     if r == ' ':
+#         print(r,'  |',end='')
+#         print('￣￣￣|'*8)
+#     else:
+#         print(r,'  |',end='')
+#         print(f'\t{rows[f'a{r}']}  |   {rows[f'b{r}']}  |   {rows[f'c{r}']}  |   {rows[f'd{r}']}  |\
+#    {rows[f'e{r}']}  |   {rows[f'f{r}']}  |   {rows[f'g{r}']}  |   {rows[f'h{r}']}  ',end='')
+#         print('|')
         
     
 
-print(' '*4,'￣'*28)
+# print(' '*4,'￣'*28)
 
-print()
-print('\t{}      {}      {}      {}      {}      {}      {}      {}  '.format(*alphabet))
-# print('\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}'.format(*alphabet))
+# print()
+# print('\t{}      {}      {}      {}      {}      {}      {}      {}  '.format(*alphabet))
 
-print()
+# print()
 # turn = 1
 # move = input("백 차례>>")
         
+
+# ### 단순 이동 ###
 # if turn % 2 == 1:   # 백 턴
 #     moves.append(move)
 #     if len(move) == 2:
 #         rows[move] = pawns_w[move[0]]
+#         rows[f'{move[0]}'] = ''
 #     rows[move[-2:]] = move[0]
     
 
 
-# print(rows)
