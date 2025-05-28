@@ -62,6 +62,11 @@ moves = []
 
 on_board = {}
 
+pawns_r_key = ['bap','bbp','bcp','bdp','bep','bfp','bgp','bhp']
+pieces_r_key = ['bR1','bN1','bB1','bK','bQ','bB2','bN2','bR2']
+
+pawns_w_key = ['wap','wbp','wcp','wdp','wep','wfp','wgp','whp']
+pieces_w_key = ['wR1','wN1','wB1','wQ','wK','wB2','wN2','wR2']
 
 
 
@@ -74,12 +79,18 @@ for i in range(8):
     for n,x in enumerate(alphabet):
         if i+1 == 1:
             rows[f'{x}{i+1}'] = pieces_w[n]
+            on_board[pieces_w_key[n]] = f'{x}{i+1}'
         elif i+1 == 2:
             rows[f'{x}{i+1}'] = pawns_w[x]
+            on_board[pawns_w_key[n]] = f'{x}{i+1}'
         elif i+1 == 7:
             rows[f'{x}{i+1}'] = pawns_r[x]
+            on_board[pawns_r_key[n]] = f'{x}{i+1}'
         elif i+1 == 8:
             rows[f'{x}{i+1}'] = pieces_r[n]
+            on_board[pieces_r_key[n]] = f'{x}{i+1}'
+
+
 
 
 
@@ -89,42 +100,60 @@ for i in range(8):
 ## 위치 저장 필요한가?? ㅇㅇ 근데 단순 위치 말고 기물까지 포함하는 위치
 
 
-print(on_board)
+#### DEBUGGING ####
+
+# move = 'e4'
+# print(pawns_w[move[0]])
+# print(rows[move])
+
+# print(on_board)
 
 # print(rows)
 
+#------------------#
 
-# ### 터미널 출력 부분 (그래픽) ###
 
-# for r in board_number:
-#     if r == ' ':
-#         print(r,'  |',end='')
-#         print('￣￣￣|'*8)
-#     else:
-#         print(r,'  |',end='')
-#         print(f'\t{rows[f'a{r}']}  |   {rows[f'b{r}']}  |   {rows[f'c{r}']}  |   {rows[f'd{r}']}  |\
-#    {rows[f'e{r}']}  |   {rows[f'f{r}']}  |   {rows[f'g{r}']}  |   {rows[f'h{r}']}  ',end='')
-#         print('|')
-        
+while True:
     
-
-# print(' '*4,'￣'*28)
-
-# print()
-# print('\t{}      {}      {}      {}      {}      {}      {}      {}  '.format(*alphabet))
-
-# print()
-# turn = 1
-# move = input("백 차례>>")
+    ### 터미널 출력 부분 (그래픽) ###
+    for r in board_number:
+        if r == ' ':
+            print(r,'  |',end='')
+            print('￣￣￣|'*8)
+        else:
+            print(r,'  |',end='')
+            print(f'\t{rows[f'a{r}']}  |   {rows[f'b{r}']}  |   {rows[f'c{r}']}  |   {rows[f'd{r}']}  |\
+    {rows[f'e{r}']}  |   {rows[f'f{r}']}  |   {rows[f'g{r}']}  |   {rows[f'h{r}']}  ',end='')
+            print('|')
+            
         
+    print(' '*4,'￣'*28)
 
-# ### 단순 이동 ###
-# if turn % 2 == 1:   # 백 턴
-#     moves.append(move)
-#     if len(move) == 2:
-#         rows[move] = pawns_w[move[0]]
-#         rows[f'{move[0]}'] = ''
-#     rows[move[-2:]] = move[0]
-    
+    print()
+    print('\t{}      {}      {}      {}      {}      {}      {}      {}  '.format(*alphabet))
 
+    print()
+            
+
+    turn = 1
+    ### 단순 이동 ###
+    if turn % 2 == 1:   # 백 턴
+        move = input("백 차례>>")
+        moves.append(move)
+        if len(move) == 2:
+            # 기물 이동(쓰고, 지우기)
+            rows[move] = pawns_w[move[0]]           
+            rows[on_board[f'w{move[0]}p']] = ' '
+            # on_board 업데이트
+            on_board[f'w{move[0]}p'] = move
+        else:
+            # 기물 이동(쓰고, 지우기)
+            if move[0] in ['R','N','B']:
+                qork = input('from',on_board[f'w{move[0]}1'],'or',on_board[f'w{move[0]}2'],'? >>')
+            rows[move[-2:]] = move[0]
+            rows[qork] = ' '
+            # on_board 업데이트
+            on_board
+            
+        
 
