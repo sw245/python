@@ -37,29 +37,21 @@ rows = {}
 for i in range(8):
     for x in alphabet:
         rows[f'{x}{i+1}'] = ' '
-        
-        # if i == 1-1: rows[1-1].append({f'{x}{i+1}':' '})
-        # elif i == 2-1: rows[2-1].append({f'{x}{i+1}':' '})
-        # elif i == 3-1: rows[3-1].append({f'{x}{i+1}':' '})
-        # elif i == 4-1: rows[4-1].append({f'{x}{i+1}':' '})
-        # elif i == 5-1: rows[5-1].append({f'{x}{i+1}':' '})
-        # elif i == 6-1: rows[6-1].append({f'{x}{i+1}':' '})
-        # elif i == 7-1: rows[7-1].append({f'{x}{i+1}':' '})
-        # elif i == 8-1: rows[8-1].append({f'{x}{i+1}':' '})
 
 
 
 
-
-
-pawns_w = {'a':'p','b':'p','c':'p','d':'p','e':'p','f':'p','g':'p','h':'p'}
+# pawns_w = {'a':'p','b':'p','c':'p','d':'p','e':'p','f':'p','g':'p','h':'p'}
+# pawns_w = ['p' for _ in range(8)]
 pieces_w = ['R','N','B','Q','K','B','N','R']
 
-pawns_r = {'a':term.red('p'),'b':term.red('p'),'c':term.red('p'),'d':term.red('p'),'e':term.red('p'),'f':term.red('p'),'g':term.red('p'),'h':term.red('p')}
+# pawns_r = {'a':term.red('p'),'b':term.red('p'),'c':term.red('p'),'d':term.red('p'),'e':term.red('p'),'f':term.red('p'),'g':term.red('p'),'h':term.red('p')}
+# pawns_r = [term.red('p') for _ in range(8)]
 pieces_r = [term.red('R'),term.red('N'),term.red('B'),term.red('K'),term.red('Q'),term.red('B'),term.red('N'),term.red('R')]
 
 moves = []
 
+location = {}
 on_board = {}
 
 pawns_r_key = ['bap','bbp','bcp','bdp','bep','bfp','bgp','bhp']
@@ -79,16 +71,20 @@ for i in range(8):
     for n,x in enumerate(alphabet):
         if i+1 == 1:
             rows[f'{x}{i+1}'] = pieces_w[n]
-            on_board[pieces_w_key[n]] = f'{x}{i+1}'
+            on_board[f'{x}{i+1}'] = pieces_w_key[n]
+            location[pieces_w_key[n]] = f'{x}{i+1}'
         elif i+1 == 2:
-            rows[f'{x}{i+1}'] = pawns_w[x]
-            on_board[pawns_w_key[n]] = f'{x}{i+1}'
+            rows[f'{x}{i+1}'] = 'p'
+            on_board[f'{x}{i+1}'] = pawns_w_key[n]
+            location[pawns_w_key[n]] = f'{x}{i+1}'
         elif i+1 == 7:
-            rows[f'{x}{i+1}'] = pawns_r[x]
-            on_board[pawns_r_key[n]] = f'{x}{i+1}'
+            rows[f'{x}{i+1}'] = term.red('p')
+            on_board[f'{x}{i+1}'] = pawns_r_key[n]
+            location[pawns_r_key[n]] = f'{x}{i+1}'
         elif i+1 == 8:
             rows[f'{x}{i+1}'] = pieces_r[n]
-            on_board[pieces_r_key[n]] = f'{x}{i+1}'
+            on_board[f'{x}{i+1}'] = pieces_r_key[n]
+            location[pieces_r_key[n]] = f'{x}{i+1}'
 
 
 
@@ -107,11 +103,13 @@ for i in range(8):
 # print(rows[move])
 
 # print(on_board)
+# print(location)
 
 # print(rows)
 
 #------------------#
 
+turn = 1
 
 while True:
     
@@ -123,7 +121,7 @@ while True:
         else:
             print(r,'  |',end='')
             print(f'\t{rows[f'a{r}']}  |   {rows[f'b{r}']}  |   {rows[f'c{r}']}  |   {rows[f'd{r}']}  |\
-    {rows[f'e{r}']}  |   {rows[f'f{r}']}  |   {rows[f'g{r}']}  |   {rows[f'h{r}']}  ',end='')
+   {rows[f'e{r}']}  |   {rows[f'f{r}']}  |   {rows[f'g{r}']}  |   {rows[f'h{r}']}  ',end='')
             print('|')
             
         
@@ -135,25 +133,82 @@ while True:
     print()
             
 
-    turn = 1
+
     ### 단순 이동 ###
-    if turn % 2 == 1:   # 백 턴
+    # 백 턴
+    if turn % 2 == 1:   
         move = input("백 차례>>")
         moves.append(move)
-        if len(move) == 2:
+        # 폰 움직임
+        if len(move) == 2:        
             # 기물 이동(쓰고, 지우기)
-            rows[move] = pawns_w[move[0]]           
-            rows[on_board[f'w{move[0]}p']] = ' '
-            # on_board 업데이트
-            on_board[f'w{move[0]}p'] = move
-        else:
-            # 기물 이동(쓰고, 지우기)
+            rows[move] = 'p'
+            rows[location[f'w{move[0]}p']] = ' '
+            # location, on_board 업데이트
+            on_board[move] = f'w{move[0]}p'
+            on_board[location[f'w{move[0]}p']] = ''
+            location[f'w{move[0]}p'] = move
+        
+        # 다른 기물 움직임
+        else:                    
+            # 기물 이동(쓰기)
+            rows[move[-2:]] = move[0]   
+            # R, N, B
             if move[0] in ['R','N','B']:
-                qork = input('from',on_board[f'w{move[0]}1'],'or',on_board[f'w{move[0]}2'],'? >>')
-            rows[move[-2:]] = move[0]
-            rows[qork] = ' '
-            # on_board 업데이트
-            on_board
+                # 기물 이동(지우기)
+                qork = input(f"from {location[f'w{move[0]}1']} or {location[f'w{move[0]}2']}? >>")
+                rows[qork] = ' '
+                # location, on_board 업데이트
+                on_board[move[-2:]] = on_board[qork]
+                on_board[qork] = ''
+                location[on_board[move[-2:]]] = move[-2:]
+                
+            else:
+                # 기물 이동(지우기)
+                rows[location[f'w{move[0]}']] = ' '
+                # location, on_board 업데이트
+                on_board[move[-2:]] = f'w{move[0]}'
+                on_board[location[f'w{move[0]}']] = ''
+                location[f'w{move[0]}'] = move[-2:]
             
+        turn += 1
+        
+    # 흑 턴
+    elif turn % 2 == 0:
+        move = input("흑 차례>>")
+        moves.append(move)
+        # 폰 움직임
+        if len(move) == 2:        
+            # 기물 이동(쓰고, 지우기)
+            rows[move] = term.red('p')
+            rows[location[f'b{move[0]}p']] = ' '
+            # location, on_board 업데이트
+            on_board[move] = f'b{move[0]}p'
+            on_board[location[f'b{move[0]}p']] = ''
+            location[f'b{move[0]}p'] = move
+        
+        # 다른 기물 움직임
+        else:                     
+            # 기물 이동(쓰기)
+            rows[move[-2:]] = term.red(move[0])
+            # R, N, B
+            if move[0] in ['R','N','B']:
+                # 기물 이동(지우기)
+                qork = input(f"from {location[f'b{move[0]}1']} or {location[f'b{move[0]}2']}? >>")
+                rows[qork] = ' '
+                # location, on_board 업데이트
+                on_board[move[-2:]] = on_board[qork]
+                on_board[qork] = ''
+                location[on_board[move[-2:]]] = move[-2:]
+                
+            else:
+                # 기물 이동(지우기)
+                rows[location[f'b{move[0]}']] = ' '
+                # location, on_board 업데이트
+                on_board[move[-2:]] = f'b{move[0]}'
+                on_board[location[f'b{move[0]}']] = ''
+                location[f'b{move[0]}'] = move[-2:]
+            
+        turn += 1
         
 
