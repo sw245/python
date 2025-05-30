@@ -51,8 +51,8 @@ pieces_r = [term.red('R'),term.red('N'),term.red('B'),term.red('K'),term.red('Q'
 
 moves = []
 
-location = {}
-on_board = {}
+location = {}   # 기물 데이터
+on_board = {}   # location 보조(위치:기물)
 
 pawns_r_key = ['bap','bbp','bcp','bdp','bep','bfp','bgp','bhp']
 pieces_r_key = ['bR1','bN1','bB1','bK','bQ','bB2','bN2','bR2']
@@ -139,6 +139,32 @@ while True:
     if turn % 2 == 1:   
         move = input("백 차례>>")
         moves.append(move)
+        
+        ### check, mate ###
+        if '+' in move:
+            move = move[:-1]
+        elif '#' in move:
+            print(move)
+            break
+        
+        
+        ### TAKES ###
+        if 'x' in move:     # 다른 기물은 takes만 구현
+            if move[0] in ['R','N','B','Q','K']:
+                location[on_board[move[-2:]]] = ''
+            else:   # 폰은 움직임까지 포함
+                if on_board[move[-2:]] == '':   # 앙파상
+                    location[on_board[f'{move[-2]}{int(move[-1])-1}']] = ''
+                else: 
+                    location[on_board[move[-2:]]] = ''
+                # 폰 움직임
+                rows[move[-2:]] = 'p'
+                rows[f'{move[0]}{int(move[-1])-1}'] = ' '
+                # location, on_board 업데이트
+                location[on_board[f'{move[0]}{int(move[-1])-1}']] = move[-2:]
+                on_board[f'{move[0]}{int(move[-1])-1}'] = ''
+                on_board[move[-2:]] = 'p'
+                
         # 폰 움직임
         if len(move) == 2:        
             # 기물 이동(쓰고, 지우기)
@@ -177,6 +203,31 @@ while True:
     elif turn % 2 == 0:
         move = input("흑 차례>>")
         moves.append(move)
+        
+        ### check, mate ###
+        if '+' in move:
+            move = move[:-1]
+        elif '#' in move:
+            print(move)
+            break
+        
+        ### TAKES ###
+        if 'x' in move:     # 다른 기물은 takes만 구현
+            if move[0] in ['R','N','B','Q','K']:
+                location[on_board[move[-2:]]] = ''
+            else:   # 폰은 움직임까지 포함                  ##### 흑 기준으로 바꿔야 함 #####
+                if on_board[move[-2:]] == '':   # 앙파상
+                    location[on_board[f'{move[-2]}{int(move[-1])-1}']] = ''
+                else: 
+                    location[on_board[move[-2:]]] = ''
+                # 폰 움직임
+                rows[move[-2:]] = term.red('p')
+                rows[f'{move[0]}{int(move[-1])-1}'] = ' '
+                # location, on_board 업데이트
+                location[on_board[f'{move[0]}{int(move[-1])-1}']] = move[-2:]
+                on_board[f'{move[0]}{int(move[-1])-1}'] = ''
+                on_board[move[-2:]] = term.red('p')
+        
         # 폰 움직임
         if len(move) == 2:        
             # 기물 이동(쓰고, 지우기)
@@ -212,3 +263,5 @@ while True:
         turn += 1
         
 
+    
+        

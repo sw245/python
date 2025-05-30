@@ -133,5 +133,8 @@
 # draw_grid(5, 5)
 
 
-move = 'e4'
-print(len(move))
+move = 'exf4'
+# print(len(move))
+
+if 'x' in move:
+    print('가능')
