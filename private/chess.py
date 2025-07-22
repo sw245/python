@@ -51,8 +51,8 @@ pieces_r = [term.red('R'),term.red('N'),term.red('B'),term.red('K'),term.red('Q'
 
 moves = []
 
-location = {}   # 기물 데이터
-on_board = {}   # location 보조(위치:기물)
+location = {}   # 기물 데이터 (기물:위치)
+on_board = {}   # location 보조 (위치:기물)
 
 pawns_r_key = ['bap','bbp','bcp','bdp','bep','bfp','bgp','bhp']
 pieces_r_key = ['bR1','bN1','bB1','bK','bQ','bB2','bN2','bR2']
