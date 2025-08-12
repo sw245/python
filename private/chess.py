@@ -60,6 +60,7 @@ pieces_r_key = ['bR1','bN1','bB1','bK','bQ','bB2','bN2','bR2']
 pawns_w_key = ['wap','wbp','wcp','wdp','wep','wfp','wgp','whp']
 pieces_w_key = ['wR1','wN1','wB1','wQ','wK','wB2','wN2','wR2']
 
+gameset = 0
 
 
 # ### 칸에 기물 할당 ###
@@ -133,6 +134,9 @@ while True:
     print()
             
 
+    if gameset == 1: 
+        print(move + '#')
+        break
 
     ### 단순 이동 ###
     # 백 턴
@@ -144,8 +148,8 @@ while True:
         if '+' in move:
             move = move[:-1]
         elif '#' in move:
-            print(move)
-            break
+            move = move[:-1]
+            gameset = 1
         
         
         ### TAKES ###
@@ -208,8 +212,8 @@ while True:
         if '+' in move:
             move = move[:-1]
         elif '#' in move:
-            print(move)
-            break
+            move = move[:-1]
+            gameset = 1
         
         ### TAKES ###
         if 'x' in move:     # 다른 기물은 takes만 구현
