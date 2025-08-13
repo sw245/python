@@ -133,8 +133,21 @@
 # draw_grid(5, 5)
 
 
-move = 'exf4'
-# print(len(move))
+# move = 'exf4'
+# # print(len(move))
 
-if 'x' in move:
-    print('가능')
+# if 'x' in move:
+#     print('가능')
+
+# l = [1, 2]
+
+# print(type(l))
+
+# x = not isinstance(l,list)
+
+# print(x)
+
+d = {'key':'value'}
+
+y = not 'key' in d
+print(y)
